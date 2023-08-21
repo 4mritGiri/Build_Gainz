@@ -34,7 +34,7 @@ This will start the BuildGainz app in development mode. You can then open the ap
 > To use BuildGainz, simply open the app and start tracking your steps and calories. You can also set goals and track your progress toward them. If you want to connect with other users, you can create an account and join the BuildGainz community.
 
 ## Auther 
->### Amrit Giri & Rupesh Karki.
+>### Rupesh Karki & Amrit Giri.
 
 
 ## License
