@@ -58,8 +58,8 @@
 
                 <ImageButton
                     android:id="@+id/settingBtn"
-                    android:layout_width="48sp"
-                    android:layout_height="48sp"
+                    android:layout_width="45sp"
+                    android:layout_height="45sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="8dp"
