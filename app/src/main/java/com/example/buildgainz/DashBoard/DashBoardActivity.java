@@ -6,6 +6,7 @@ import static com.example.buildgainz.R.menu;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.buildgainz.DashBoard.Settings.ChangePasswordActivity;
 import com.example.buildgainz.DashBoard.Settings.DeleteUserActivity;
 import com.example.buildgainz.LoginPage.LoginPageActivity;
 import com.example.buildgainz.R;
+import com.example.buildgainz.TrackingActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +32,7 @@ public class DashBoardActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageButton settingButton;
     ShapeableImageView profileButton;
-    RelativeLayout exercisePlan;
+    RelativeLayout exercisePlan ,trackingCardView;
     FirebaseAuth authProfile;
     FirebaseUser firebaseUser ;
 
@@ -45,12 +47,19 @@ public class DashBoardActivity extends AppCompatActivity {
         settingButton = findViewById ( R.id.settingBtn );
         profileButton = findViewById ( R.id.profileBtn );
         exercisePlan = findViewById ( R.id.exerCardView );
+        trackingCardView= findViewById ( R.id.trackingCardView   );
 
         authProfile = FirebaseAuth.getInstance ( );
         firebaseUser = authProfile.getCurrentUser ( );
 
         loadProfileDataFromFirebase ( );
 
+        trackingCardView.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity ( new Intent ( DashBoardActivity.this , TrackingActivity.class ) );
+            }
+        } );
         profileButton.setOnClickListener ( v -> {
 
 
@@ -58,6 +67,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
             startActivity ( intent );
 
+            finish ();
         } );
 
         settingButton.setOnClickListener ( v -> {
