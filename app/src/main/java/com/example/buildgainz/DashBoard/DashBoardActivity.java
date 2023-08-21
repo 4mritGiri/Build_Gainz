@@ -64,10 +64,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
 
             Intent intent = new Intent ( DashBoardActivity.this , ProfileActivity.class );
-
             startActivity ( intent );
-
-            finish ();
         } );
 
         settingButton.setOnClickListener ( v -> {
