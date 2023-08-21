@@ -20,6 +20,7 @@ import com.example.buildgainz.DashBoard.DashBoardActivity;
 import com.example.buildgainz.LoginPage.SignUpPage.ReadWriteUserDetails;
 import com.example.buildgainz.R;
 import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     String fullName;
     String email;
-    ImageView imageView;
+    ShapeableImageView imageView;
     TextView changeProfilePic, yourEmailProfile, fullNameProfile, welcomeUser;
     FirebaseAuth authProfile;
     FirebaseUser firebaseUser;
