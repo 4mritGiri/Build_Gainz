@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    tools:context=".DashBoard.DashBoardActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:layout_marginBottom="20sp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileBtn"
+                    android:layout_width="48sp"
+                    android:layout_height="48sp"
+                    app:strokeWidth="1dp"
+                    android:padding="1dp"
+                    app:strokeColor="@color/red"
+                    android:layout_marginTop="12dp"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    android:layout_alignParentStart="true"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/profile_button"
+                    android:src="@drawable/profile"
+                    tools:ignore="RedundantDescriptionCheck"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/cooper"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/dashboard"
+                    android:textColor="@color/white"
+                    android:textSize="40sp"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageButton
+                    android:id="@+id/settingBtn"
+                    android:layout_width="48sp"
+                    android:layout_height="48sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/grey"
+                    android:contentDescription="@string/setting_button"
+                    android:padding="16dp"
+                    android:src="@drawable/setting"
+                    tools:ignore="RedundantDescriptionCheck" />
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20sp"
+        app:cardElevation="12sp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/exerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:background="@drawable/exercise_plan"
+            android:gravity="bottom">
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/calcCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20sp"
+        app:cardElevation="12sp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:background="@drawable/calc"
+            android:gravity="bottom">
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/trackingCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20sp"
+        app:cardElevation="12sp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:background="@drawable/tracking"
+            android:gravity="bottom">
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

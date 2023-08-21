@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    tools:context=".DashBoard.Profile.ChangeProfilePicActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarChangePic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/cooper"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/profile_picture"
+                    android:textColor="@color/white"
+                    android:textSize="36sp" />
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50sp"
+                android:layout_marginBottom="50sp"
+                android:gravity="center"
+                android:text="@string/upload_profile_pic"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <Button
+                android:id="@+id/choosePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="50sp"
+                android:fontFamily="@font/cooper"
+                android:gravity="center"
+                android:paddingStart="20sp"
+                android:paddingEnd="20sp"
+                android:text="@string/choose_picture"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:ignore="VisualLintButtonSize" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageViewProfilePic"
+                    android:layout_width="300sp"
+                    android:layout_height="300sp"
+                    android:background="@drawable/circle"
+                    android:layout_marginBottom="40sp"
+                    android:contentDescription="@string/profile_pic"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_pic" />
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/uploadPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40sp"
+                android:layout_marginBottom="40sp"
+                android:fontFamily="@font/cooper"
+                android:gravity="center"
+                android:paddingStart="20sp"
+                android:paddingEnd="20sp"
+                android:text="@string/upload_profile_pic"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+
+
