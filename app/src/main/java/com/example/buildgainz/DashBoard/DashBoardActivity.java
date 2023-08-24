@@ -6,7 +6,6 @@ import static com.example.buildgainz.R.menu;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -19,9 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.buildgainz.DashBoard.Profile.ProfileActivity;
 import com.example.buildgainz.DashBoard.Settings.ChangePasswordActivity;
 import com.example.buildgainz.DashBoard.Settings.DeleteUserActivity;
+import com.example.buildgainz.DashBoard.ExercisePlan.ExercisesActivity;
 import com.example.buildgainz.LoginPage.LoginPageActivity;
 import com.example.buildgainz.R;
-import com.example.buildgainz.TrackingActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,9 +31,8 @@ public class DashBoardActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageButton settingButton;
     ShapeableImageView profileButton;
-    RelativeLayout exercisePlan ,trackingCardView;
+    RelativeLayout exercisePlan;
     FirebaseAuth authProfile;
-    FirebaseUser firebaseUser ;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -47,23 +45,21 @@ public class DashBoardActivity extends AppCompatActivity {
         settingButton = findViewById ( R.id.settingBtn );
         profileButton = findViewById ( R.id.profileBtn );
         exercisePlan = findViewById ( R.id.exerCardView );
-        trackingCardView= findViewById ( R.id.trackingCardView   );
-
         authProfile = FirebaseAuth.getInstance ( );
-        firebaseUser = authProfile.getCurrentUser ( );
+        FirebaseUser firebaseUser = authProfile.getCurrentUser ( );
+        if ( firebaseUser != null && firebaseUser.getPhotoUrl ( ) != null ) {
+            Uri photoUri = firebaseUser.getPhotoUrl ( );//After user has uploaded set User PP
+            Picasso.get ( ).load ( photoUri ).into ( profileButton ); //Loading uri to ImageView
 
-        loadProfileDataFromFirebase ( );
 
-        trackingCardView.setOnClickListener ( new View.OnClickListener ( ) {
-            @Override
-            public void onClick ( View v ) {
-                startActivity ( new Intent ( DashBoardActivity.this , TrackingActivity.class ) );
-            }
-        } );
+        }
         profileButton.setOnClickListener ( v -> {
+
+
             Intent intent = new Intent ( DashBoardActivity.this , ProfileActivity.class );
 
             startActivity ( intent );
+
         } );
 
         settingButton.setOnClickListener ( v -> {
@@ -89,17 +85,9 @@ public class DashBoardActivity extends AppCompatActivity {
             } );
         } );
 
-        exercisePlan.setOnClickListener ( v -> startActivity ( new Intent ( DashBoardActivity.this, Exercises.class ) ) );
+        exercisePlan.setOnClickListener ( v -> startActivity ( new Intent ( DashBoardActivity.this , ExercisesActivity.class ) ) );
 
-    }
 
-    private void loadProfileDataFromFirebase() {
-
-        // Load user profile picture using Picasso
-        if ( firebaseUser != null && firebaseUser.getPhotoUrl ( ) != null ) {
-            Uri photoUri = firebaseUser.getPhotoUrl ( );//After user has uploaded set User PP
-            Picasso.get ( ).load ( photoUri ).into ( profileButton ); //Loading uri to ImageView
-        }
     }
 
     private void showLogoutDialog ( ) {
