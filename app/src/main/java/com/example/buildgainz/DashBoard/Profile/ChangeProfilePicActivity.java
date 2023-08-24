@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.buildgainz.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -31,7 +31,7 @@ public class ChangeProfilePicActivity extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseAuth authProfile;
     FirebaseUser firebaseUser;
-    private ImageView imageViewUpload;
+    private ShapeableImageView imageViewUpload;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -55,7 +55,7 @@ public class ChangeProfilePicActivity extends AppCompatActivity {
         Uri uri = Objects.requireNonNull ( firebaseUser ).getPhotoUrl ( );
 
         //Set user's current profilePic in ImageView  (Regular URIs).
-        Picasso.get ( ).load ( uri ).centerCrop ( ).into ( imageViewUpload );
+        Picasso.get ( ).load ( uri ).into ( imageViewUpload );
 
         //Choose image to upload
         buttonUploadPicChoose.setOnClickListener ( v -> openFileChooser ( ) );
@@ -66,7 +66,7 @@ public class ChangeProfilePicActivity extends AppCompatActivity {
     }
 
     private void UploadPic ( ) {
-        if ( uriImage != null ) {
+        if (uriImage != null) {
             //Save the image with uid of the currently logged User
             StorageReference fileReference = storageReference.child ( Objects.requireNonNull ( authProfile.getCurrentUser ( ) ).getUid ( ) + "." +
                     getFilesExtension ( uriImage ) );
@@ -110,7 +110,7 @@ public class ChangeProfilePicActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult ( int requestCode , int resultCode , @Nullable Intent data ) {
         super.onActivityResult ( requestCode , resultCode , data );
-        if ( requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData ( ) != null ) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData ( ) != null) {
             uriImage = data.getData ( );
             imageViewUpload.setImageURI ( uriImage );
         }
@@ -120,8 +120,7 @@ public class ChangeProfilePicActivity extends AppCompatActivity {
     //Back Button
     @Override
     public boolean onOptionsItemSelected ( @NonNull MenuItem item ) {
-        int itemId = item.getItemId();
-        if ( itemId == android.R.id.home ) {
+        if (item.getItemId ( ) == android.R.id.home) {
             onBackPressed ( ); // This will emulate the behavior of the back button
             return true;
         }

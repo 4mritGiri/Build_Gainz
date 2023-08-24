@@ -17,33 +17,32 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/grey"
             android:layout_marginBottom="20sp"
             >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 >
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profileBtn"
-                    android:layout_width="48sp"
-                    android:layout_height="48sp"
-                    app:strokeWidth="1dp"
-                    android:padding="1dp"
-                    app:strokeColor="@color/red"
-                    android:layout_marginTop="12dp"
+                    android:layout_width="60sp"
+                    android:layout_height="60sp"
+                    android:layout_marginTop="5sp"
+                    android:background="@color/grey"
                     app:shapeAppearanceOverlay="@style/circular"
-                    android:layout_alignParentStart="true"
                     android:scaleType="centerCrop"
+                    app:strokeColor="@color/sky_blue"
+                    app:strokeWidth="2sp"
+                    android:padding="2sp"
                     android:contentDescription="@string/profile_button"
                     android:src="@drawable/profile"
-                    tools:ignore="RedundantDescriptionCheck"
-                    />
+                    tools:ignore="RedundantDescriptionCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,8 +57,8 @@
 
                 <ImageButton
                     android:id="@+id/settingBtn"
-                    android:layout_width="45sp"
-                    android:layout_height="45sp"
+                    android:layout_width="48sp"
+                    android:layout_height="48sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="8dp"
@@ -69,6 +68,7 @@
                     android:padding="16dp"
                     android:src="@drawable/setting"
                     tools:ignore="RedundantDescriptionCheck" />
+
             </RelativeLayout>
 
 
@@ -123,6 +123,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/trackingCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -131,7 +132,6 @@
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
-            android:id="@+id/trackingCardView"
             android:layout_width="match_parent"
             android:layout_height="180sp"
             android:background="@drawable/tracking"

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,10 +37,10 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     String fullName;
     String email;
-    ShapeableImageView imageView;
     TextView changeProfilePic, yourEmailProfile, fullNameProfile, welcomeUser;
     FirebaseAuth authProfile;
     FirebaseUser firebaseUser;
+    private ShapeableImageView imageView;
     private FlexboxLayout genderFlexBox;
     private FlexboxLayout levelFlexBox;
     private FlexboxLayout goalsFlexBox;
@@ -54,13 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar = findViewById ( R.id.toolbarProfile );
 
 
-        authProfile = FirebaseAuth.getInstance ( );
-        firebaseUser = authProfile.getCurrentUser ( );
-
         yourEmailProfile = findViewById ( R.id.yourEmailProfile );
         fullNameProfile = findViewById ( R.id.fullNameProfile );
         welcomeUser = findViewById ( R.id.welcomeUser );
-        
         imageView = findViewById ( R.id.profilePic );
         changeProfilePic = findViewById ( R.id.changeProfilePic );
 
@@ -76,10 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
         setupGenderRadioButtons ( );
         setupLevelRadioButtons ( );
         setupGoalsRadioButtons ( );
+
         loadProfileDataFromFirebase ( );
+
         setupSaveButton ( );
 
-
+        authProfile = FirebaseAuth.getInstance ( );
+        firebaseUser = authProfile.getCurrentUser ( );
 
         if ( firebaseUser != null ) {
             showUserProfile ( firebaseUser );
@@ -88,16 +86,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
 
+        imageView.setOnClickListener ( v -> openChangeProfilePicActivity ( ) );
+        changeProfilePic.setOnClickListener ( v -> openChangeProfilePicActivity ( ) );
 
-        changeProfilePic.setOnClickListener ( v -> {
-            Intent intent = new Intent ( ProfileActivity.this , ChangeProfilePicActivity.class );
-            startActivity ( intent );
-        } );
 
-        imageView.setOnClickListener ( v -> {
-            Intent intent = new Intent ( ProfileActivity.this , ChangeProfilePicActivity.class );
-            startActivity ( intent );
-        } );
+    }
+
+    private void openChangeProfilePicActivity ( ) {
+        Intent intent = new Intent ( ProfileActivity.this , ChangeProfilePicActivity.class );
+        startActivity ( intent );
     }
 
 
@@ -269,7 +266,7 @@ public class ProfileActivity extends AppCompatActivity {
         //Extracting User reference from firebase
         DatabaseReference reference = FirebaseDatabase.getInstance ( ).getReference ( "Registered Users" );
         reference.child ( userId ).addListenerForSingleValueEvent ( new ValueEventListener ( ) {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint ( "SetTextI18n" )
             @Override
             public void onDataChange ( @NonNull DataSnapshot snapshot ) {
                 ReadWriteUserDetails writeUserDetails = snapshot.getValue ( ReadWriteUserDetails.class );
