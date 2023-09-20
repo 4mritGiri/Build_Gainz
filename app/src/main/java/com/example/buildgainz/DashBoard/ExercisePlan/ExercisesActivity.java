@@ -32,230 +32,234 @@ import java.util.Objects;
 
 public class ExercisesActivity extends AppCompatActivity implements RecyclerViewInterface {
     private ExerciseAdapter exerciseAdapter;
-    private List < Exercise > exercises;
-    private List < Exercise > originalExercises;
+    private List<Exercise> exercises;
+    private Button push, pull, staticBtn, body, dumbbell, machine, beginner, intermediate, expert;
+    RecyclerView recyclerView;
+    SearchView searchView;
+    Toolbar toolbar;
+    private List<Exercise> originalExercises;
 
 
     @Override
-    protected void onCreate ( Bundle savedInstanceState ) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_exercises );
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_exercises);
 
-        Toolbar toolbar = findViewById ( R.id.toolbarExercise );
-        setSupportActionBar ( toolbar );
-        SearchView searchView = findViewById ( R.id.search_view );
-        searchView.setQueryHint ( "Exercise name, equipment or muscle" );
-        RecyclerView recyclerView = findViewById ( R.id.recyclerExercise );
-        Button push = findViewById ( R.id.push );
-        Button pull = findViewById ( R.id.pull );
-        Button staticBtn = findViewById ( R.id.staticBtn );
-        Button body = findViewById ( R.id.body );
-        Button dumbbell = findViewById ( R.id.dumbbell );
-        Button machine = findViewById ( R.id.machine );
-        Button beginner = findViewById ( R.id.beginner );
-        Button intermediate = findViewById ( R.id.moderate );
-        Button expert = findViewById ( R.id.expert );
+        toolbar = findViewById(R.id.toolbarExercise);
+        setSupportActionBar(toolbar);
+        searchView = findViewById(R.id.search_view);
+        searchView.setQueryHint("Exercise name, equipment or muscle");
+        recyclerView = findViewById(R.id.recyclerExercise);
+        push = findViewById(R.id.push);
+        pull = findViewById(R.id.pull);
+        staticBtn = findViewById(R.id.staticBtn);
+        body = findViewById(R.id.body);
+        dumbbell = findViewById(R.id.dumbbell);
+        machine = findViewById(R.id.machine);
+        beginner = findViewById(R.id.beginner);
+        intermediate = findViewById(R.id.moderate);
+        expert = findViewById(R.id.expert);
 
-        Objects.requireNonNull ( getSupportActionBar ( ) ).setDisplayHomeAsUpEnabled ( true );
-
-
-        recyclerView.setLayoutManager ( new LinearLayoutManager ( this ) );
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
-        exercises = loadExercisesFromJson ( );
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        exerciseAdapter = new ExerciseAdapter ( this , exercises , this );
-        recyclerView.setAdapter ( exerciseAdapter );
 
-        searchView.setOnQueryTextListener ( new SearchView.OnQueryTextListener ( ) {
+        exercises = loadExercisesFromJson();
+
+        exerciseAdapter = new ExerciseAdapter(this, exercises, this);
+        recyclerView.setAdapter(exerciseAdapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit ( String query ) {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
-            @SuppressLint ( "NotifyDataSetChanged" )
+            @SuppressLint("NotifyDataSetChanged")
             @Override
-            public boolean onQueryTextChange ( String newText ) {
-                List < Exercise > filteredExercises = new ArrayList <> ( );
+            public boolean onQueryTextChange(String newText) {
+                List<Exercise> filteredExercises = new ArrayList<>();
                 for (Exercise exercise : originalExercises) {
-                    if (exercise.getName ( ).toLowerCase ( ).contains ( newText.toLowerCase ( ) )) {
-                        filteredExercises.add ( exercise );
+                    if (exercise.getName().toLowerCase().contains(newText.toLowerCase())) {
+                        filteredExercises.add(exercise);
                     }
                 }
-                exercises.clear ( );
-                exercises.addAll ( filteredExercises );
-                exerciseAdapter.notifyDataSetChanged ( );
+                exercises.clear();
+                exercises.addAll(filteredExercises);
+                exerciseAdapter.notifyDataSetChanged();
                 return true;
             }
-        } );
+        });
 
 
-        push.setOnClickListener ( v -> filterListByForce ( "push" ) );
+        push.setOnClickListener(v -> filterListByForce("push"));
 
-        pull.setOnClickListener ( v -> filterListByForce ( "pull" ) );
+        pull.setOnClickListener(v -> filterListByForce("pull"));
 
-        staticBtn.setOnClickListener ( v -> filterListByForce ( "static" ) );
-
-
-        body.setOnClickListener ( v -> filterListByEquipment ( "body only" ) );
+        staticBtn.setOnClickListener(v -> filterListByForce("static"));
 
 
-        dumbbell.setOnClickListener ( v -> filterListByEquipment ( "dumbbell" ) );
+        body.setOnClickListener(v -> filterListByEquipment("body only"));
 
 
-        machine.setOnClickListener ( v -> filterListByEquipment ( "machine" ) );
+        dumbbell.setOnClickListener(v -> filterListByEquipment("dumbbell"));
 
 
-        beginner.setOnClickListener ( v -> filterListByLevel ( "beginner" ) );
+        machine.setOnClickListener(v -> filterListByEquipment("machine"));
 
 
-        intermediate.setOnClickListener ( v -> filterListByLevel ( "intermediate" ) );
+        beginner.setOnClickListener(v -> filterListByLevel("beginner"));
 
-        expert.setOnClickListener ( v -> filterListByLevel ( "expert" ) );
+
+        intermediate.setOnClickListener(v -> filterListByLevel("intermediate"));
+
+        expert.setOnClickListener(v -> filterListByLevel("expert"));
 
     }
 
-    private List < Exercise > loadExercisesFromJson ( ) {
-        List < Exercise > exercises = new ArrayList <> ( );
+    private List<Exercise> loadExercisesFromJson() {
+        List<Exercise> exercises = new ArrayList<>();
 
         try {
-            InputStream inputStream = getResources ( ).openRawResource ( R.raw.exercises_list );
-            byte[] buffer = new byte[inputStream.available ( )];
-            inputStream.read ( buffer );
-            inputStream.close ( );
+            InputStream inputStream = getResources().openRawResource(R.raw.exercises_list);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
 
-            String json = new String ( buffer , StandardCharsets.UTF_8 );
-            JSONArray jsonArray = new JSONArray ( json );
+            String json = new String(buffer, StandardCharsets.UTF_8);
+            JSONArray jsonArray = new JSONArray(json);
 
-            for (int i = 0; i < jsonArray.length ( ); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject ( i );
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Exercise exercise = new Exercise ( );
-                exercise.setName ( jsonObject.getString ( "name" ) );
-                exercise.setForce ( jsonObject.getString ( "force" ) );
-                exercise.setLevel ( jsonObject.getString ( "level" ) );
-                exercise.setEquipment ( jsonObject.getString ( "equipment" ) );
+                Exercise exercise = new Exercise();
+                exercise.setName(jsonObject.getString("name"));
+                exercise.setForce(jsonObject.getString("force"));
+                exercise.setLevel(jsonObject.getString("level"));
+                exercise.setEquipment(jsonObject.getString("equipment"));
 
                 // Extract and set primary muscles
-                JSONArray primaryMusclesArray = jsonObject.getJSONArray ( "primaryMuscles" );
-                List < String > primaryMuscles = new ArrayList <> ( );
-                for (int j = 0; j < primaryMusclesArray.length ( ); j++) {
-                    primaryMuscles.add ( primaryMusclesArray.getString ( j ) );
+                JSONArray primaryMusclesArray = jsonObject.getJSONArray("primaryMuscles");
+                List<String> primaryMuscles = new ArrayList<>();
+                for (int j = 0; j < primaryMusclesArray.length(); j++) {
+                    primaryMuscles.add(primaryMusclesArray.getString(j));
                 }
-                exercise.setPrimaryMuscles ( primaryMuscles );
+                exercise.setPrimaryMuscles(primaryMuscles);
 
 
                 // Extract and set instructions
-                JSONArray instructionsArray = jsonObject.getJSONArray ( "instructions" );
-                List < String > instructions = new ArrayList <> ( );
-                for (int j = 0; j < instructionsArray.length ( ); j++) {
-                    instructions.add ( instructionsArray.getString ( j ) );
+                JSONArray instructionsArray = jsonObject.getJSONArray("instructions");
+                List<String> instructions = new ArrayList<>();
+                for (int j = 0; j < instructionsArray.length(); j++) {
+                    instructions.add(instructionsArray.getString(j));
                 }
-                exercise.setInstructions ( instructions );
+                exercise.setInstructions(instructions);
 
-                exercise.setCategory ( jsonObject.getString ( "category" ) );
+                exercise.setCategory(jsonObject.getString("category"));
 
                 // Extract and set image filename and subdirectory
-                JSONArray imagesArray = jsonObject.getJSONArray ( "images" );
-                if (imagesArray.length ( ) > 0) {
-                    String imagePath = imagesArray.getString ( 0 ); // Assuming the first image is used
-                    String[] imagePathComponents = imagePath.split ( "/" );
+                JSONArray imagesArray = jsonObject.getJSONArray("images");
+                if (imagesArray.length() > 0) {
+                    String imagePath = imagesArray.getString(0); // Assuming the first image is used
+                    String[] imagePathComponents = imagePath.split("/");
                     if (imagePathComponents.length >= 2) {
-                        exercise.setImageFilename ( imagePathComponents[imagePathComponents.length - 1].replace ( ".jpg" , "" ) );
-                        exercise.setImageSubdirectory ( imagePathComponents[imagePathComponents.length - 2] );
+                        exercise.setImageFilename(imagePathComponents[imagePathComponents.length - 1].replace(".jpg", ""));
+                        exercise.setImageSubdirectory(imagePathComponents[imagePathComponents.length - 2]);
                     }
                 }
 
-                exercises.add ( exercise );
+                exercises.add(exercise);
             }
-        } catch ( IOException | JSONException e ) {
-            e.printStackTrace ( );
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
 
-        originalExercises = new ArrayList <> ( exercises );
+        originalExercises = new ArrayList<>(exercises);
 
         return exercises;
     }
 
     //Back Button
     @Override
-    public boolean onOptionsItemSelected ( @NonNull MenuItem item ) {
-        if (item.getItemId ( ) == android.R.id.home) {
-            onBackPressed ( ); // This will emulate the behavior of the back button
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // This will emulate the behavior of the back button
             return true;
         }
-        return super.onOptionsItemSelected ( item );
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onItemClick ( int position ) {
-        if (exercises != null && position >= 0 && position < exercises.size ( )) {
-            Exercise clickedExercise = exercises.get ( position );
+    public void onItemClick(int position) {
+        if (exercises != null && position >= 0 && position < exercises.size()) {
+            Exercise clickedExercise = exercises.get(position);
 
-            ExerciseCnstrForViewActivity exerciseCnstrForViewActivity = new ExerciseCnstrForViewActivity ( );
-            exerciseCnstrForViewActivity.setName ( clickedExercise.getName ( ) );
-            exerciseCnstrForViewActivity.setForce ( clickedExercise.getForce ( ) );
-            exerciseCnstrForViewActivity.setLevel ( clickedExercise.getLevel ( ) );
-            exerciseCnstrForViewActivity.setPrimaryMuscles ( clickedExercise.getPrimaryMuscles ( ) );
-            exerciseCnstrForViewActivity.setInstructions ( clickedExercise.getInstructions ( ) );
-            exerciseCnstrForViewActivity.setImageFilename ( clickedExercise.getImageFilename ( ) );
-            exerciseCnstrForViewActivity.setImageSubdirectory ( clickedExercise.getImageSubdirectory ( ) );
+            ExerciseCnstrForViewActivity exerciseCnstrForViewActivity = new ExerciseCnstrForViewActivity();
+            exerciseCnstrForViewActivity.setName(clickedExercise.getName());
+            exerciseCnstrForViewActivity.setForce(clickedExercise.getForce());
+            exerciseCnstrForViewActivity.setLevel(clickedExercise.getLevel());
+            exerciseCnstrForViewActivity.setPrimaryMuscles(clickedExercise.getPrimaryMuscles());
+            exerciseCnstrForViewActivity.setInstructions(clickedExercise.getInstructions());
+            exerciseCnstrForViewActivity.setImageFilename(clickedExercise.getImageFilename());
+            exerciseCnstrForViewActivity.setImageSubdirectory(clickedExercise.getImageSubdirectory());
 
-            Intent intent = new Intent ( ExercisesActivity.this , ExerciseViewActivity.class );
-            intent.putExtra ( ExerciseViewActivity.EXTRA_SIMPLE_EXERCISE , exerciseCnstrForViewActivity );
-            startActivity ( intent );
-            exerciseAdapter.setSelectedExercise ( position );
+            Intent intent = new Intent(ExercisesActivity.this, ExerciseViewActivity.class);
+            intent.putExtra(ExerciseViewActivity.EXTRA_SIMPLE_EXERCISE, exerciseCnstrForViewActivity);
+            startActivity(intent);
+            exerciseAdapter.setSelectedExercise(position);
         } else {
             assert exercises != null;
-            Log.d ( "ExercisesActivity" , "Exercises size: " + exercises.size ( ) );
+            Log.d("ExercisesActivity", "Exercises size: " + exercises.size());
 
-            Toast.makeText ( ExercisesActivity.this , "Error loading exercises." , Toast.LENGTH_SHORT ).show ( );
+            Toast.makeText(ExercisesActivity.this, "Error loading exercises.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @SuppressLint ( "NotifyDataSetChanged" )
-    private void filterListByLevel ( String status ) {
-        List < Exercise > filteredExercises = new ArrayList <> ( );
+    @SuppressLint("NotifyDataSetChanged")
+    private void filterListByLevel(String status) {
+        List<Exercise> filteredExercises = new ArrayList<>();
 
         for (Exercise exercise : originalExercises) {
-            if (exercise.getLevel ( ).equalsIgnoreCase ( status )) {
-                filteredExercises.add ( exercise );
+            if (exercise.getLevel().equalsIgnoreCase(status)) {
+                filteredExercises.add(exercise);
             }
         }
-        exercises.clear ( );
-        exercises.addAll ( filteredExercises );
-        exerciseAdapter.setExercises ( filteredExercises );
-        exerciseAdapter.notifyDataSetChanged ( );
+        exercises.clear();
+        exercises.addAll(filteredExercises);
+        exerciseAdapter.setExercises(filteredExercises);
+        exerciseAdapter.notifyDataSetChanged();
     }
 
-    @SuppressLint ( "NotifyDataSetChanged" )
-    private void filterListByForce ( String force ) {
-        List < Exercise > filteredExercises = new ArrayList <> ( );
+    @SuppressLint("NotifyDataSetChanged")
+    private void filterListByForce(String force) {
+        List<Exercise> filteredExercises = new ArrayList<>();
 
         for (Exercise exercise : originalExercises) {
-            if (exercise.getForce ( ).equalsIgnoreCase ( force )) {
-                filteredExercises.add ( exercise );
+            if (exercise.getForce().equalsIgnoreCase(force)) {
+                filteredExercises.add(exercise);
             }
         }
-        exercises.clear ( );
-        exercises.addAll ( filteredExercises );
-        exerciseAdapter.setExercises ( filteredExercises );
-        exerciseAdapter.notifyDataSetChanged ( );
+        exercises.clear();
+        exercises.addAll(filteredExercises);
+        exerciseAdapter.setExercises(filteredExercises);
+        exerciseAdapter.notifyDataSetChanged();
     }
 
-    @SuppressLint ( "NotifyDataSetChanged" )
-    private void filterListByEquipment ( String equipment ) {
-        List < Exercise > filteredExercises = new ArrayList <> ( );
+    @SuppressLint("NotifyDataSetChanged")
+    private void filterListByEquipment(String equipment) {
+        List<Exercise> filteredExercises = new ArrayList<>();
 
         for (Exercise exercise : originalExercises) {
-            if (exercise.getEquipment ( ).equalsIgnoreCase ( equipment )) {
-                filteredExercises.add ( exercise );
+            if (exercise.getEquipment().equalsIgnoreCase(equipment)) {
+                filteredExercises.add(exercise);
             }
         }
-        exercises.clear ( );
-        exercises.addAll ( filteredExercises );
-        exerciseAdapter.setExercises ( filteredExercises );
-        exerciseAdapter.notifyDataSetChanged ( );
+        exercises.clear();
+        exercises.addAll(filteredExercises);
+        exerciseAdapter.setExercises(filteredExercises);
+        exerciseAdapter.notifyDataSetChanged();
     }
 
 }

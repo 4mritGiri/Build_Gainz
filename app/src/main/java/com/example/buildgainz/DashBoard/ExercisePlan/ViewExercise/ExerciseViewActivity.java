@@ -77,7 +77,6 @@ public class ExerciseViewActivity extends AppCompatActivity {
                 return imageView;
             } );
 
-
             // Load and display the first exercise image
             loadExerciseImage ( exerciseCnstrForViewActivity.getImageSubdirectory ( ) , exerciseCnstrForViewActivity.getImageFilename ( ) );
         }
@@ -119,7 +118,6 @@ public class ExerciseViewActivity extends AppCompatActivity {
         }
     }
 
-
     private void showPreviousImage ( ) {
 
         imageSwitcher.showPrevious ( );
@@ -129,7 +127,6 @@ public class ExerciseViewActivity extends AppCompatActivity {
 
         imageSwitcher.showNext ( );
     }
-
 
     //Back Button
     @Override
