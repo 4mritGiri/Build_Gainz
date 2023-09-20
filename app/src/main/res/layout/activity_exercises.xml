@@ -1,56 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/dark_grey"
     android:orientation="vertical"
     tools:context=".DashBoard.ExercisePlan.ExercisesActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/dark_grey"
+        android:orientation="vertical">
 
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarExercise"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grey">
 
-            <RelativeLayout
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarExercise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="20sp"
+                        android:fontFamily="@font/cooper"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/exercise_list"
+                        android:textColor="@color/white"
+                        android:textSize="36sp" />
+
+                </RelativeLayout>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/dark_grey"
+
+            >
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:background="@drawable/search_view_background"
+                android:scrollbarStyle="insideInset"
+                app:iconifiedByDefault="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"        android:background="@color/dark_grey"
+
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/push"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/cooper"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/exercise_list"
-                    android:textColor="@color/white"
-                    android:textSize="36sp"
-                    android:layout_marginBottom="20sp"
-                    />
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/push"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
-            </RelativeLayout>
+                <Button
+                    android:id="@+id/pull"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/pull"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
+                <Button
+                    android:id="@+id/staticBtn"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/static_exercise"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"        android:background="@color/dark_grey"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerExercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        />
+                <Button
+                    android:id="@+id/body"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/body"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
+                <Button
+                    android:id="@+id/dumbbell"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/dumbbell"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
+                <Button
+                    android:id="@+id/machine"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/machine"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
-</LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_grey"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/beginner"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/beginner"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
+
+                <Button
+                    android:id="@+id/moderate"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/moderate"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
+
+                <Button
+                    android:id="@+id/expert"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginEnd="11sp"
+                    android:layout_weight="1"
+                    android:text="@string/expert"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerExercise"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dark_grey"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

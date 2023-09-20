@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.buildgainz.DashBoard.Calculator.CalculatorActivity;
+import com.example.buildgainz.DashBoard.ExercisePlan.ExercisesActivity;
 import com.example.buildgainz.DashBoard.Profile.ProfileActivity;
 import com.example.buildgainz.DashBoard.Settings.ChangePasswordActivity;
 import com.example.buildgainz.DashBoard.Settings.DeleteUserActivity;
-import com.example.buildgainz.DashBoard.ExercisePlan.ExercisesActivity;
+import com.example.buildgainz.DashBoard.Tracking.StepTrackingActivity;
 import com.example.buildgainz.LoginPage.LoginPageActivity;
 import com.example.buildgainz.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -31,7 +33,7 @@ public class DashBoardActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageButton settingButton;
     ShapeableImageView profileButton;
-    RelativeLayout exercisePlan;
+    RelativeLayout exercisePlan, calculator, tracking;
     FirebaseAuth authProfile;
 
     @Override
@@ -45,9 +47,12 @@ public class DashBoardActivity extends AppCompatActivity {
         settingButton = findViewById ( R.id.settingBtn );
         profileButton = findViewById ( R.id.profileBtn );
         exercisePlan = findViewById ( R.id.exerCardView );
+        calculator = findViewById ( R.id.calcCardView );
+        tracking = findViewById ( R.id.trackingCardView );
+
         authProfile = FirebaseAuth.getInstance ( );
         FirebaseUser firebaseUser = authProfile.getCurrentUser ( );
-        if ( firebaseUser != null && firebaseUser.getPhotoUrl ( ) != null ) {
+        if (firebaseUser != null && firebaseUser.getPhotoUrl ( ) != null) {
             Uri photoUri = firebaseUser.getPhotoUrl ( );//After user has uploaded set User PP
             Picasso.get ( ).load ( photoUri ).into ( profileButton ); //Loading uri to ImageView
 
@@ -71,11 +76,11 @@ public class DashBoardActivity extends AppCompatActivity {
 
                 int id = item.getItemId ( );
 
-                if ( id == R.id.changePass ) {
+                if (id == R.id.changePass) {
                     startActivity ( new Intent ( DashBoardActivity.this , ChangePasswordActivity.class ) );
-                } else if ( id == R.id.deleteAcc ) {
+                } else if (id == R.id.deleteAcc) {
                     startActivity ( new Intent ( DashBoardActivity.this , DeleteUserActivity.class ) );
-                } else if ( id == R.id.logout ) {//create logout with DialogBox
+                } else if (id == R.id.logout) {//create logout with DialogBox
                     showLogoutDialog ( );
                     return true;
                 } else {
@@ -87,7 +92,9 @@ public class DashBoardActivity extends AppCompatActivity {
 
         exercisePlan.setOnClickListener ( v -> startActivity ( new Intent ( DashBoardActivity.this , ExercisesActivity.class ) ) );
 
+        calculator.setOnClickListener ( v -> startActivity ( new Intent ( DashBoardActivity.this , CalculatorActivity.class ) ) );
 
+        tracking.setOnClickListener ( v -> startActivity ( new Intent ( DashBoardActivity.this , StepTrackingActivity.class ) ) );
     }
 
     private void showLogoutDialog ( ) {

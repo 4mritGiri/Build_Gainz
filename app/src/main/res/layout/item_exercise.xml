@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/grey"
+    android:background="@color/dark_grey"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:cardBackgroundColor="#00000000"
+        app:cardBackgroundColor="@color/dark_grey"
         app:cardCornerRadius="20sp"
-        app:cardElevation="5sp"
+        app:cardElevation="10sp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
 
-            android:id="@+id/exerCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="200sp"
             android:orientation="vertical"
+            android:background="@color/grey"
             android:padding="10sp">
 
 

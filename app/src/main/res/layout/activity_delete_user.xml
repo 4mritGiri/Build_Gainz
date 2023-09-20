@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DashBoard.Settings.DeleteUserActivity"
     android:orientation="vertical"
-    android:background="@color/grey"
+    android:background="@color/dark_grey"
     >
 
 
@@ -18,7 +18,7 @@
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarChangePwd"
+            android:id="@+id/toolbarDeleteUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grey">
@@ -54,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/dark_grey"
         >
 
         <TextView
