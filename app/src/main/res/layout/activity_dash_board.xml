@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/dark_grey"
     android:orientation="vertical"
     tools:context=".DashBoard.DashBoardActivity">
 
@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/grey"
-            android:layout_marginBottom="20sp"
             >
 
             <RelativeLayout
@@ -82,7 +81,9 @@
         android:layout_gravity="center"
         app:cardCornerRadius="20sp"
         app:cardElevation="12sp"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        android:background="@color/dark_grey"
+        >
 
         <RelativeLayout
             android:id="@+id/exerCardView"
@@ -100,15 +101,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/calcCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:cardCornerRadius="20sp"
+        android:background="@color/dark_grey"
         app:cardElevation="12sp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
+            android:id="@+id/calcCardView"
             android:layout_width="match_parent"
             android:layout_height="180sp"
             android:background="@drawable/calc"
@@ -123,15 +125,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/trackingCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/dark_grey"
         app:cardCornerRadius="20sp"
         app:cardElevation="12sp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
+            android:id="@+id/trackingCardView"
             android:layout_width="match_parent"
             android:layout_height="180sp"
             android:background="@drawable/tracking"
