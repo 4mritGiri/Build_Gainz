@@ -78,7 +78,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter < ExerciseAdapter.Exer
 
     public class ExerciseViewHolder extends RecyclerView.ViewHolder {
 
-
         private final TextView exerciseNameTextView;
         private final TextView forceTextView;
         private final TextView levelTextView;
@@ -106,7 +105,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter < ExerciseAdapter.Exer
             } );
         }
 
-
         @SuppressLint ( "SetTextI18n" )
         public void bind ( Exercise exercise ) {
             exerciseNameTextView.setText ( exercise.getName ( ) );
@@ -128,9 +126,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter < ExerciseAdapter.Exer
                     InputStream inputStream1 = assetManager.open ( imagePath1 );
                     Drawable drawable1 = Drawable.createFromStream ( inputStream1 , null );
 
-
                     exerciseImageView.setImageDrawable ( drawable1 );
-
 
                     inputStream1.close ( );
                 } else {
